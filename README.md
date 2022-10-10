@@ -1,2 +1,2 @@
 Simple MERN app for practice.
-Blog with auth and picture uploads.
+\nBlog with auth and picture uploads.
