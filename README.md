@@ -1,1 +1,1 @@
-# project0
+Simple MERN app to practice.
