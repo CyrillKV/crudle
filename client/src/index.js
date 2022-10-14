@@ -8,6 +8,8 @@ import App from "./App";
 
 import reducers from './reducers'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
