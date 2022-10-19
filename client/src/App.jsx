@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 
 import { getPosts } from './actions/posts'
@@ -10,11 +10,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const App = () => {
+  const [ currentId, setCurrentId ] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [currentId, dispatch]);
 
   return (
     <Container>
@@ -22,8 +23,12 @@ const App = () => {
         <Col className="d-flex justify-content-center"><h1>Project Name</h1></Col>
       </Row>
       <Row>
-        <Col><Posts/></Col>
-        <Col><PostForm/></Col>
+        <Col>
+          <Posts setCurrentId={ setCurrentId }/>
+        </Col>
+        <Col>
+          <PostForm currentId={ currentId } setCurrentId={ setCurrentId }/>
+        </Col>
       </Row>
     </Container>
   );
