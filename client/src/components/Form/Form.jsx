@@ -31,7 +31,7 @@ const PostForm = ({ currentId, setCurrentId }) => {
 
   return (
     <form autoComplete="off" className="form" onSubmit={ handleSubmit }>
-      <legend> { currentId ? 'Editing' : 'Creating' } post``:</legend>
+      <legend> { currentId ? 'Editing' : 'Creating' } post:</legend>
       <label>Creator:
         <input type="text" value={ postData.creator } onChange={(e) => { setPostData({ ...postData, creator: e.target.value }) }}></input>
       </label>

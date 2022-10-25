@@ -6,6 +6,7 @@ import Post from "./Post/Post"
 
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts);
+
   return (
     <Container>
       {posts.map((post) => <Post key={ post._id } post={ post } setCurrentId={ setCurrentId }/>)}
