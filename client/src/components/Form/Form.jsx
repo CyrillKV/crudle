@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import FileBase from "react-file-base64";
-import { useDispatch, useSelector } from "react-redux";
-import { createPost, updatePost } from "../../actions/posts";
+import FileBase from 'react-file-base64';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPost, updatePost } from '../../actions/posts';
 
 
-const PostForm = ({ currentId, setCurrentId }) => {
+const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '', });
-  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id == currentId) : null);
+  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
 
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const PostForm = ({ currentId, setCurrentId }) => {
   };
 
   return (
-    <form autoComplete="off" className="form" onSubmit={ handleSubmit }>
+    <form autoComplete="off" className='form' onSubmit={ handleSubmit }>
       <legend> { currentId ? 'Editing' : 'Creating' } post:</legend>
       <label>Creator:
         <input type="text" value={ postData.creator } onChange={(e) => { setPostData({ ...postData, creator: e.target.value }) }}></input>
@@ -53,4 +53,4 @@ const PostForm = ({ currentId, setCurrentId }) => {
   )
 };
 
-export default PostForm;
+export default Form;
