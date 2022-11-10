@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '@mui/material';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
@@ -11,10 +11,10 @@ const App = () => {
     <BrowserRouter>
       <Container maxWidth="lg">
         <Navbar />
-        <Switch>
-          <Route path='/' exact component={ Home }/>
-          <Route path='/auth' exact component={ Auth }/>
-        </Switch>
+        <Routes>
+          <Route path='/' element={ <Home /> }/>
+          <Route path='/auth' element={ <Auth /> }/>
+        </Routes>
       </Container>
     </BrowserRouter>
   );

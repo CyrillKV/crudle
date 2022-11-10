@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@mui/material';
 
+import "./Navbar.css";
+
 const Navbar = () => {
   const user = null;
   return (
-    <AppBar position="static" color="inherit">
+    <AppBar className="navbar" position="static" color="inherit">
       <div>
         <Typography component={Link} to='/' variant='h2' align='center'>Project Name</Typography>
       </div>

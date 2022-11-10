@@ -1,19 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useHistory } from 'react';
+import { useDispatch } from 'react-redux';
+import { signup, signin } from '../../actions/auth';
 
-import { Avatar, Button, Typography, Paper, Grid, Container, TextField } from '@mui/material';
+import { Avatar, Button, Typography, Paper, Grid, Container } from '@mui/material';
 import { LockOutlined } from '@mui/icons-material';
 
 import Input from './Input';
 
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+
 const Auth = () => {
+  const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
-  const isSignup = false;
+  const [isSignup, setIsSignup] = useState(false);
 
-  const handleSubmit = () => {};
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefaut();
+    if (isSignup) {
+      dispatch(signup, history);
+    } else {
+      dispatch(signin, history);
+    };
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
+
+  const switchMode = () => {
+    setIsSignup((prevIsSignup) => !prevIsSignup);
+    setShowPassword(false);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -27,7 +49,7 @@ const Auth = () => {
             {isSignup && (
               <>
                 <Input name='firstName' label='First Name' handleChange={ handleChange } autoFocus half/>
-                <Input name='lastName' label='Last Name' handleChange={ handleChange } autoFocus/>
+                <Input name='lastName' label='Last Name' handleChange={ handleChange } autoFocus half/>
               </>
             )}
             <Input name='email' label='Email Adress' handleChange={ handleChange } type='email'/>
@@ -38,6 +60,13 @@ const Auth = () => {
           <Button type='submit' fullWidth variant='contained' color='primary'>
             {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Button onClick={ switchMode }>
+                { isSignup ? "Already have an account? Sign In!" : "Don't have an account? Sign Up!" }
+              </Button>
+            </Grid>
+          </Grid>
         </form>
       </Paper>
     </Container>
