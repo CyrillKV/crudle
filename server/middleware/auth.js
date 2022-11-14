@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 const auth = async (req, res, next) => {
     try {
-        const token = req.headers.Authorization.split(' ')[1];
+        const token = req.headers.Authorization.split(" ")[1];
         let decodedData;
 
         if (token) {
@@ -12,7 +12,7 @@ const auth = async (req, res, next) => {
 
         next();
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
     }
 };
 

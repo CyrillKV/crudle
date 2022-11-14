@@ -1,4 +1,4 @@
-import React, { useState, useHistory } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signup, signin } from '../../actions/auth';
 
@@ -15,14 +15,13 @@ const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const handleSubmit = (e) => {
-    e.preventDefaut();
+    e.preventDefault();
     if (isSignup) {
-      dispatch(signup, history);
+      dispatch(signup(formData));
     } else {
-      dispatch(signin, history);
+      dispatch(signin(formData));
     };
   };
 
@@ -33,6 +32,7 @@ const Auth = () => {
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
   const switchMode = () => {
+    setFormData(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
   };
