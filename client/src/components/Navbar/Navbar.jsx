@@ -1,7 +1,8 @@
-import React, { useState, } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
 
 import { LOGOUT } from '../../constants/actionTypes'
 
@@ -15,6 +16,14 @@ const Navbar = () => {
     dispatch({ type: LOGOUT });
     setUser(null);
   };
+
+  useEffect(() => {
+    const token = user?.token;
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+  });
 
   return (
     <AppBar className="navbar" position="static" color="inherit">
