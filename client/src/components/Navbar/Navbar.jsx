@@ -4,9 +4,8 @@ import { AppBar, Typography, Toolbar, Avatar, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
-import { LOGOUT } from '../../constants/actionTypes'
+import { LOGOUT } from '../../constants/actionTypes';
 
-import "./Navbar.css";
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -21,25 +20,40 @@ const Navbar = () => {
     const token = user?.token;
     if (token) {
       const decodedToken = decode(token);
-      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logout()
+      };
     }
   });
 
   return (
-    <AppBar className="navbar" position="static" color="inherit">
-      <div>
-        <Typography component={Link} to='/' variant='h2' align='center'>Project Name</Typography>
-      </div>
-      <Toolbar>
-        {user ? (
-          <div>
-            <Avatar alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
-            <Typography variant='h6'>{user.result.name}</Typography>
-            <Button variant='contained' color='secondary' onClick={ logout }>Logout</Button>
-          </div>
+    <AppBar position="static" color="inherit" sx={{
+      borderRadius: 4,
+      margin: '30px 0',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: '10px 50px',
+    }}>
+      <Typography component={Link} color='primary' to='/' variant='h2' align='center' sx={{
+        textDecoration: 'none',
+        justifyContent: 'flex-start'
+      }}>AppName</Typography>
+      <Toolbar sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-end',
+        maxWidth: '400px',
+      }}>
+      {user ? (
+        <>
+        <Avatar alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
+        <Typography variant='h6'sx={{px: '1rem'}}>{user.result.name}</Typography>
+        <Button variant='contained' color='secondary' onClick={ logout }>Logout</Button>
+        </>
         ) : (
           <Button component={Link} to='/auth' variant='contained' color='primary'>Sign In</Button>
-        )}
+          )}
       </Toolbar>
     </AppBar>
   )
