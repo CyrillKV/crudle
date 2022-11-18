@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Post from "./Post/Post"
 
 
-const Posts = ({ setCurrentId }) => {
+const Posts = ({ setCurrentId, switchShowModal }) => {
   const posts = useSelector((state) => state.posts);
 
   return (
@@ -12,7 +12,7 @@ const Posts = ({ setCurrentId }) => {
       <Grid container alignItems="stretch" spacing={3}>
         {posts.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} md={4}>
-            <Post post={post} setCurrentId={setCurrentId} />
+            <Post post={post} setCurrentId={setCurrentId} switchShowModal={switchShowModal} />
           </Grid>
         ))}
       </Grid>

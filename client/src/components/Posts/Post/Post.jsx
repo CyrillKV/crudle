@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { likePost, deletePost } from '../../../actions/posts';
 
 
-const Post = ({ post, setCurrentId }) => {
+const Post = ({ post, setCurrentId, switchShowModal }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
 
@@ -22,6 +22,11 @@ const Post = ({ post, setCurrentId }) => {
     }
 
     return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
+  };
+
+  const edit = () => {
+    setCurrentId(post._id);
+    switchShowModal();
   };
 
   return (
@@ -43,7 +48,7 @@ const Post = ({ post, setCurrentId }) => {
         </Button>
         {(user?.result?._id === post?.creator) && (
         <div style={{marginLeft: 'auto',}}>
-          <Button size="small" color="primary" onClick={() => setCurrentId(post._id)} >
+          <Button size="small" color="primary" onClick={ edit } >
             <Edit fontSize="small" />
           </Button>
           <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>

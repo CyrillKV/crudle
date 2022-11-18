@@ -29,16 +29,17 @@ const Navbar = () => {
   return (
     <AppBar position="static" color="inherit" sx={{
       borderRadius: 4,
-      margin: '30px 0',
+      margin: '0',
       display: 'flex',
       flexDirection: 'row',
+      flexWrap: 'wrap',
       justifyContent: 'space-between',
-      padding: '10px 50px',
+      padding: '10px 40px',
     }}>
       <Typography component={Link} color='primary' to='/' variant='h2' align='center' sx={{
         textDecoration: 'none',
         justifyContent: 'flex-start'
-      }}>AppName</Typography>
+      }}><b>CRUD</b>le</Typography>
       <Toolbar sx={{
         display: 'flex',
         flexWrap: 'wrap',
