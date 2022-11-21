@@ -30,8 +30,8 @@ const Post = ({ post, setCurrentId, switchShowModal }) => {
   };
 
   return (
-    <Card variant='outlined' sx={{p: '1rem', borderRadius: '15px'}}>
-      <CardMedia sx={{height: '10rem'}} component='img' src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
+    <Card variant='outlined' sx={{p: '1rem 1rem 0 1rem', borderRadius: '15px'}}>
+      <CardMedia sx={{height: '12rem'}} component='img' src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
       <div>
         <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>

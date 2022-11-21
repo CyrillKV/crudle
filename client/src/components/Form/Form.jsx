@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography } from '@mui/material';
+import { TextField, Button, Typography, Paper, Grid } from '@mui/material';
 import FileBase from 'react-file-base64';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ const Form = ({ currentId, setCurrentId, switchShowModal }) => {
     if(post) setPostData(post)
   }, [post]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if(currentId){
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
@@ -33,16 +33,44 @@ const Form = ({ currentId, setCurrentId, switchShowModal }) => {
     setPostData({ title: '', message: '', tags: '', selectedFile: '', });
   };
 
+  if (!user?.result?.name) {
+    return (
+      <Paper>
+        <Typography variant="h6" align="center" padding='2rem'>
+          Please Sign In to add posts.
+        </Typography>
+      </Paper>
+    );
+  }
+
   return (
+    <>
+    <Typography variant="h5" marginBottom="1rem">{currentId ? `Editing "${post.title}"` : 'Creating a post'}</Typography>
     <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-      <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Creating a post'}</Typography>
-      <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
-      <TextField name="message" variant="outlined" label="Message" fullWidth multiline rows={4} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
-      <TextField name="tags" variant="outlined" label="Tags (coma separated)" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
-      <div><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
-      <Button variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
-      <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField name="message" variant="outlined" label="Message" fullWidth multiline rows={4} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField name="tags" variant="outlined" label="Tags (coma separated)" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
+        </Grid>
+        <Grid item xs={12} marginBottom='1rem'>
+          <div><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
+        </Grid>
+        <Grid container justifyContent='space-around'>
+          <Grid item>
+            <Button variant="contained" color="primary" size="medium" type="submit" fullWidth>Submit</Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="secondary" size="medium" onClick={clear} fullWidth>Clear</Button>
+          </Grid>
+        </Grid>
+      </Grid>
     </form>
+    </>
   );
 };
 
