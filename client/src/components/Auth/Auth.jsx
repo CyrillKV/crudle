@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signup, signin } from '../../actions/auth';
-
+import { useNavigate } from 'react-router-dom';
 import { Avatar, Button, Typography, Paper, Grid, Container } from '@mui/material';
 import { LockOutlined } from '@mui/icons-material';
 
@@ -15,13 +15,14 @@ const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
 
   const dispatch = useDispatch();
+  const history = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignup) {
-      dispatch(signup(formData));
+      dispatch(signup(formData, history));
     } else {
-      dispatch(signin(formData));
+      dispatch(signin(formData, history));
     };
   };
 

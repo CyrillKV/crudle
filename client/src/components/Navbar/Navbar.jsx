@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
@@ -10,9 +10,12 @@ import { LOGOUT } from '../../constants/actionTypes';
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const logout = () => {
     dispatch({ type: LOGOUT });
+    navigate('/auth');
     setUser(null);
   };
 
@@ -22,9 +25,10 @@ const Navbar = () => {
       const decodedToken = decode(token);
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         logout()
-      };
+      }
     }
-  });
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, [location]);
 
   return (
     <AppBar position="static" color="inherit" sx={{

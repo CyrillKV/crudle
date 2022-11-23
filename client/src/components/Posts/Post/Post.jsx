@@ -41,7 +41,7 @@ const Post = ({ post, setCurrentId, switchShowModal }) => {
       <CardContent sx={{height: '6rem', overflow: 'auto', p: '0'}}>
         <Typography variant="body2" color="text.secondary" component="p">{post.message}</Typography>
       </CardContent>
-      <Typography variant="body2" color="text.secondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+      <Typography variant="body2" color="text.secondary" component="h2" mt='1rem'>{post.tags.map((tag) => `#${tag} `)}</Typography>
       <CardActions>
         <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
           <Likes />

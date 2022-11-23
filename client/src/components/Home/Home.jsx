@@ -8,7 +8,7 @@ import Posts from '../Posts/Posts';
 import ModalForm from '../Form/ModalForm';
 
 const Home = () => {
-  const [ currentId, setCurrentId ] = useState(null);
+  const [currentId, setCurrentId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [currentId, dispatch]);
 
   return (
     <>

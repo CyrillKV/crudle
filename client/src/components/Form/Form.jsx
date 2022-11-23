@@ -17,7 +17,7 @@ const Form = ({ currentId, setCurrentId, switchShowModal }) => {
     if(post) setPostData(post)
   }, [post]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if(currentId){
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
