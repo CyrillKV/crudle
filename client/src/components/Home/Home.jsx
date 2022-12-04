@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <>
-      <Button variant='contained' sx={{m: '1rem'}} color='primary' onClick={switchShowModal}>+ Add Card</Button>
+      <Button variant='contained' size='large' sx={{m: '1rem 0', borderRadius: '0 25px 0 0'}} color='primary' onClick={switchShowModal}>+ Add Card</Button>
       <ModalForm currentId={currentId} setCurrentId={setCurrentId} showModal={showModal} switchShowModal={switchShowModal}/>
       <Posts setCurrentId={setCurrentId} switchShowModal={switchShowModal}/>
     </>

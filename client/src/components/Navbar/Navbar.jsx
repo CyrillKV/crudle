@@ -32,7 +32,6 @@ const Navbar = () => {
 
   return (
     <AppBar position="static" color="inherit" sx={{
-      borderRadius: 4,
       margin: '0',
       display: 'flex',
       flexDirection: 'row',
