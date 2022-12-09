@@ -10,7 +10,7 @@ const Posts = ({ setCurrentId, switchShowModal }) => {
   return (
     !posts.length ? <CircularProgress /> : (
       <Grid container alignItems="stretch" spacing={4}>
-        {posts.reverse().map((post) => (
+        {posts.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} md={4}>
             <Post post={post} setCurrentId={setCurrentId} switchShowModal={switchShowModal} />
           </Grid>
